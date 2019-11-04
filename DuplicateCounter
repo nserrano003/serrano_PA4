@@ -1,0 +1,48 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class DuplicateCounter {
+   private Map<String, Integer> Counter;
+
+   public DuplicateCounter(){
+       Counter = new HashMap<String,Integer>();
+   }
+   public void write(String dataFile){
+       try {
+           PrintWriter outputFile = new PrintWriter(new File(dataFile));
+           for(String l : Counter.keySet()) {
+               outputFile.println(l + " " + Counter.get(l));
+           }
+           outputFile.close();
+       } catch (FileNotFoundException e) {
+           System.out.println(e.getMessage());
+       }
+   }
+   public void count(String dataFile){
+       Scanner inputFile = null;
+       try {
+           inputFile = new Scanner(new File(dataFile));
+       } catch (FileNotFoundException e) {
+           System.out.println(e.getMessage());
+           return;
+       }
+       inputFile.useDelimiter("([0-9]|[.,!?:;'\"-]|\\s)+");
+       while(inputFile.hasNext()){
+           String word = inputFile.next().toLowerCase();
+           Int counted = Counter.get(wording);
+           if(counted == null){
+               counted = 1;
+          }
+           else{
+               counted = counted + 1;
+           Counter.put(wording, counted);
+          }
+       }
+       inputFile.close();
+   }
+
+}
